@@ -4,6 +4,7 @@ const runAt = 0;
 
 const startDate = new Date();
 let calculatedDate = 555;
+let lastTimeLog = 555;
 
 const scheduler = async () => {while (true) {
     const currentDate = new Date();
@@ -17,6 +18,9 @@ const scheduler = async () => {while (true) {
             console.log(error.response.status)
         }
     }
-    console.log("Checking at day " + currentDate.getUTCDate() + " previous is " + calculatedDate + " current hours is " + currentDate.getUTCHours() + " expected = " + runAt);
+    if (lastTimeLog != currentDate.getUTCMinutes()) {
+        console.log("Checking at day " + currentDate.getUTCDate() + " previous is " + calculatedDate + " current hours is " + currentDate.getUTCHours() + " expected = " + runAt);
+        lastTimeLog = currentDate.getUTCMinutes();
+    }
 }}
 scheduler()
